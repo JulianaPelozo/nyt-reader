@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NYT Reader</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121212">
+    <title>Notícias NY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>NYT Reader</h1>
-  </header>
 
-  <main>
-    <section id="search-section">
-      <input type="text" id="search-input" placeholder="Buscar artigos...">
-      <button id="search-btn">Buscar</button>
-    </section>
+    <header>
+        <div class="header-content">
+            <h1>Notícias NY 🌎</h1>
+            <p>Descubra as notícias do New York Times sobre onde você está.</p>
+        </div>
+    </header>
 
-    <section id="articles-section">
-      <h2>Notícias Principais</h2>
-      <ul id="articles-list"></ul>
-    </section>
-  </main>
+    <main class="container">
+        <section class="loading-state">
+            <div class="loader"></div>
+            <p>Buscando sua localização...</p>
+        </section>
 
-  <footer>
-    <p>NYT Reader - PWA Demo</p>
-  </footer>
+        <section id="results" class="results-section" style="display: none;">
+            </section>
 
-  <script src="app.js"></script>
+        <section class="no-results-state" style="display: none;">
+            <p>Nenhum artigo encontrado. Tente novamente ou busque outro local.</p>
+            <button class="retry-btn">Tentar novamente</button>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
 </body>
 </html>
