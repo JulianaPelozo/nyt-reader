@@ -23,17 +23,6 @@ function initApp() {
         fetchNYTArticles("Londres");
     }
 
-function showLoading(isLoading) {
-  const loadingEl = document.querySelector('.loading-state');
-  const resultsEl = document.getElementById('results');
-    if (isLoading) {
-        loadingEl.style.display = 'flex';
-        resultsEl.style.display = 'none';
-    } else {
-        loadingEl.style.display = 'none';
-        resultsEl.style.display = 'block'; // Ou 'flex', dependendo do seu layout
-    }
-}
 }
 
 async function fetchNYTArticles(location) {
@@ -51,6 +40,18 @@ async function fetchNYTArticles(location) {
 
     } catch (error) {
         console.error("Erro ao buscar artigos do NYT:", error);
+    }
+}
+
+function showLoading(isLoading) {
+  const loadingEl = document.querySelector('.loading-state');
+  const resultsEl = document.getElementById('results');
+    if (isLoading) {
+        loadingEl.style.display = 'flex';
+        resultsEl.style.display = 'none';
+    } else {
+        loadingEl.style.display = 'none';
+        resultsEl.style.display = 'block'; 
     }
 }
 
