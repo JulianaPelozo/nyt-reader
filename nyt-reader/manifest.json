@@ -1,27 +1,27 @@
 {
-    "name": "Local Lens - Notícias NYT",
+    "name": "Notícias NYT",
     "short_name": "Local Lens",
     "description": "Descubra artigos históricos e notícias do The New York Times sobre a sua localização atual usando a geolocalização.",
-    "start_url": "./index.html",
-    "scope": "./",
+    "start_url": "/index.html",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#121212",
     "theme_color": "#4CAF50",
     "orientation": "portrait",
     "icons": [
         {
-            "src": "images/icon-192.png",
+            "src": "img/icon-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "images/icon-512.png",
+            "src": "img/icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "images/maskable-icon.png",
-            "sizes": "192x192",
+            "src": "img/maskable-icon-512.png",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         }

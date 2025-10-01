@@ -6,22 +6,19 @@ const urlsToCache = [
   '/style.css',
   '/app.js',
   '/manifest.json',
-  '/images/icon-192.png',
-  '/images/icon-512.png'
+  '/img/icon-192.png',
+  '/img/icon-512.png',
+  '/offline.html'
 ];
 
-
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Instalando e cacheadando App Shell...');
+  console.log('[Service Worker] Instalando e cacheando App Shell...');
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-      .then(() => self.skipWaiting()) // Força o novo SW a se ativar imediatamente
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    }).then(() => self.skipWaiting())
   );
 });
-
 
 self.addEventListener('activate', event => {
   console.log('[Service Worker] Ativando e limpando caches antigos...');
@@ -40,35 +37,41 @@ self.addEventListener('activate', event => {
   return self.clients.claim();
 });
 
-
-
 self.addEventListener('fetch', event => {
   const requestUrl = new URL(event.request.url);
 
-  if (urlsToCache.includes(requestUrl.pathname) || requestUrl.origin === location.origin) {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-      })
-    );
-    return;
+  // ✅ Garante que "/" também funcione offline
+  if (requestUrl.origin === location.origin) {
+    let pathname = requestUrl.pathname === '/' ? '/index.html' : requestUrl.pathname;
+
+    if (urlsToCache.includes(pathname)) {
+      event.respondWith(
+        caches.match(pathname).then(response => {
+          return response || fetch(event.request);
+        })
+      );
+      return;
+    }
   }
 
-
+  // ✅ Network-first para a API do NYT
   if (requestUrl.host.includes('api.nytimes.com')) {
     event.respondWith(
       caches.open(CACHE_NAME).then(cache => {
         return cache.match(event.request).then(cachedResponse => {
           const fetchPromise = fetch(event.request).then(networkResponse => {
-            // Atualiza o cache com a nova resposta da rede
             cache.put(event.request, networkResponse.clone());
             return networkResponse;
           });
-         
           return cachedResponse || fetchPromise;
         });
       })
     );
     return;
   }
+
+  // ✅ Fallback offline
+  event.respondWith(
+    fetch(event.request).catch(() => caches.match('/offline.html'))
+  );
 });

@@ -34,7 +34,7 @@ body {
     padding: 1rem;
 }
 
-/* Cabeçalho */
+
 header {
     background-color: var(--card-background);
     color: var(--text-color);
@@ -54,7 +54,7 @@ header p {
     color: var(--subtle-text-color);
 }
 
-/* Estado de Carregamento (Loader) */
+
 .loading-state, .no-results-state {
     display: flex;
     flex-direction: column;
@@ -80,7 +80,7 @@ header p {
     100% { transform: rotate(360deg); }
 }
 
-/* Botão de Tentar Novamente */
+
 .retry-btn {
     background-color: var(--primary-color);
     color: white;
@@ -97,7 +97,7 @@ header p {
     background-color: #388e3c; /* Tom mais escuro do verde */
 }
 
-/* Cartões de Artigo */
+
 .article-item {
     background-color: var(--card-background);
     padding: 1.5rem;
